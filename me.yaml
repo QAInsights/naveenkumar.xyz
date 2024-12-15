@@ -1,0 +1,43 @@
+about: "I am a full stack developer. I build stuff. I know nothing."
+ 
+stack:
+  languages: [Java, JavaScript, Python, Bash]
+  frameworks: ["Spring Boot"]
+  testing: [JMeter, k6, Locust, LoadRunner]
+  frontend: [HTML, CSS, "LWC (Beginner)"]
+  tools_os: [Git, Docker, Kubernetes, Jenkins, Linux]
+
+experience:
+  - company: Salesforce
+    position: Software Developer
+    year: 2021 - Present
+  - company: Ascendum Solutions
+    position: Performance Engineer
+    year: 2019 - 2021
+  - company: Kaplan
+    position: Performance Engineer
+    year: 2019 - 2019
+  - company: Infosys Limited
+    position: Technical Test Lead
+    year: 2006 - 2019
+
+education:
+  - degree: MS in Cyber Security and Quality Assurance
+    university: Western Governors University
+    year: 2021-2022
+  - degree: MS in Political Science and Public Administration
+    university: Bharathiyar University
+    year: 2007-2008
+  - degree: BS in Applied Sciences
+    university: PSG College of Technology
+    year: 2003-2006
+  - degree: High School
+    university: Devanga High School
+    year: 1991-2003
+
+
+certifications:
+  - LFCS - Linux System Administration
+  - Certified Kubernetes Application Developer
+  - Certified Ethical Hacker
+  - AWS Solution Architect Associate

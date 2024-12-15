@@ -1,0 +1,15 @@
+connect:
+  - name: blog
+    url: https://qainsights.com/
+  - name: github
+    url: https://github.com/qainsights
+  - name: youtube
+    url: https://www.youtube.com/@qainsights
+  - name: linkedin
+    url: https://linkedin.com/in/naveenkumarn
+  - name: x
+    url: https://x.com/qainsights
+  - name: email
+    url: mailto:naveenkumar at qain dot si
+  - name: resume
+    url: https://app.rezi.ai/s/25E51vcqnwTJb4pPvAKRg

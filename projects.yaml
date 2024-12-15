@@ -1,0 +1,13 @@
+projects:
+  - name: PerfGPT
+    url: https://www.perfgpt.ai/
+  - name: Kel
+    url: https://kel.qainsights.com/
+  - name: Hamster
+    url: https://hamster.qainsights.com/
+  - name: JMeter Docker Extension
+    url: https://hub.docker.com/extensions/qainsights/jmeter-docker-extension
+  - name: Clip It!
+    url: https://chromewebstore.google.com/detail/clip-it/dmacanhpegjjgmicfbinaafcnjaigecf
+  - name: Confetti Celebrations
+    url: https://chromewebstore.google.com/detail/confetti-celebrations/jlnaaichmlfhooionenmhdnimhdmoijb
