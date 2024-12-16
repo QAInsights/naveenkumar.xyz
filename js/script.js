@@ -22,11 +22,22 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+
+    // profile hover
+    const profile = document.querySelector('.profile');
+    profile.addEventListener('mouseover', () => {
+       const header = document.querySelector('.header');
+       header.style.boxShadow = '0 0 20px #0b57ee';
+    });
+    profile.addEventListener('mouseout', () => {
+        const header = document.querySelector('.header');
+        header.style.boxShadow = '0 0 0px #0b57ee';
+    });
 });
 
 const loadYamlFile = async () => {
     try {
-        const response = await fetch('me.yaml');
+        const response = await fetch('data/me.yaml');
         const yamlText = await response.text();
         const data = jsyaml.load(yamlText);
         // Display About
@@ -46,7 +57,7 @@ loadYamlFile();
 
 const loadConnectYamlFile = async () => {
     try {
-        const response = await fetch('./connect.yaml');
+        const response = await fetch('data/connect.yaml');
         const yamlText = await response.text();
         const data = jsyaml.load(yamlText);
         displayConnect("connect", data.connect);
@@ -60,7 +71,7 @@ loadConnectYamlFile();
 
 const loadProjectsYamlFile = async () => {
     try {
-        const response = await fetch('./projects.yaml');
+        const response = await fetch('data/projects.yaml');
         const yamlText = await response.text();
         const data = jsyaml.load(yamlText);
         displayProjects("projects", data.projects);
@@ -194,40 +205,6 @@ function displayEducation(key, value) {
         });
     }
 }
-            // degree.innerHTML = indent + "-" + indent + degree.innerHTML;
-            // parentElement.appendChild(degree);
-
-            // const degreeValue = document.createElement('span');
-            // degreeValue.classList.add('string');
-            // degreeValue.textContent = item.degree;            
-            // degreeValue.innerHTML = indent + degreeValue.innerHTML + breakLine;
-            // parentElement.appendChild(degreeValue);
-
-            // const university = document.createElement('span');
-            // university.classList.add('key');
-            // university.style.marginLeft = '25px';
-            // university.textContent = "university:";            
-            // university.innerHTML = indent + university.innerHTML;
-            // parentElement.appendChild(university);
-
-            // const universityValue = document.createElement('span');
-            // universityValue.classList.add('string');
-            // universityValue.textContent = item.university;
-            // universityValue.innerHTML = indent + universityValue.innerHTML + breakLine;
-            // parentElement.appendChild(universityValue);
-
-            // const graduation_year = document.createElement('span');
-            // graduation_year.classList.add('key');
-            // graduation_year.style.marginLeft = '25px';
-            // graduation_year.textContent = "graduation_year:";            
-            // graduation_year.innerHTML = indent + graduation_year.innerHTML;
-            // parentElement.appendChild(graduation_year);
-
-            // const graduation_yearValue = document.createElement('span');
-            // graduation_yearValue.classList.add('string');
-            // graduation_yearValue.textContent = item.graduation_year;
-            // graduation_yearValue.innerHTML = indent + graduation_yearValue.innerHTML + breakLine + breakLine;
-            // parentElement.appendChild(graduation_yearValue);
 
 function displayExperience(key, value) {
     const parentElement = document.getElementsByClassName('content-yaml')[0];
@@ -345,7 +322,7 @@ function checkForSpace(item) {
 const loadHeaderJson = async () => {
     try {
        // read head.json
-       const response = await fetch('head.json');
+       const response = await fetch('data/head.json');
        const jsonText = await response.text();
        const data = JSON.parse(jsonText);
        const preHeader = document.getElementsByClassName('header')[0];  
@@ -358,3 +335,7 @@ const loadHeaderJson = async () => {
 };
 
 loadHeaderJson();
+
+ 
+
+ 

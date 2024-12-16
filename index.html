@@ -3,37 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NaveenKumar Namachivayam</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="NaveenKumar Namachivayam - Software Developer and Performance Engineer with expertise in Java, JavaScript, and Performance Testing. View my portfolio and professional experience.">
+    <meta name="keywords" content="NaveenKumar Namachivayam, Software Developer, Performance Engineer, Java Developer, JavaScript, Performance Testing, Web Development">
+    <meta name="author" content="NaveenKumar Namachivayam">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="NaveenKumar Namachivayam - Software Developer">
+    <meta property="og:description" content="Software Developer and Performance Engineer with expertise in Java, JavaScript, and Performance Testing.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://qainsights.com/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="NaveenKumar Namachivayam - Software Developer">
+    <meta name="twitter:description" content="Software Developer and Performance Engineer with expertise in Java, JavaScript, and Performance Testing.">
+    <link rel="icon" type="image/x-icon" href="style/favicon.ico">
+    <title>NaveenKumar Namachivayam - Software Developer | Performance Engineer</title>
+    <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 </head>
-<body>
-    <div class="container">
-        <div class="main-content">
-            <div class="header">
+<body class="dark-mode">
+    <div class="parent-container">
+        <div class="container">
+            <div class="main-content">
+                <div class="header"></div>
+                <div class="content-yaml"></div>
             </div>
-            <div class="content-yaml">                
-            </div>
-        </div>
-
+       
         <div class="main-sidebar">
-            <div class="social-sidebar">                             
-            </div>      
-            <div class="font-controls">
+            <div class="header-image">
+                <button id="decrease-font-size" onclick="decreaseFontSize()">a</button>
+                <button id="increase-font-size" onclick="increaseFontSize()">A</button>
+                <button id="reset-font-size" onclick="document.body.style.fontSize = '16px'">=</button>
+                <button id="toggle-theme" onclick="toggleTheme()">
+                    <i class="fas fa-sun"></i>
+                </button>                  
+                <img src="images/NaveenKumar.jpeg" alt="NaveenKumar Namachivayam" class="profile">
+
+            </div>
+            <div class="social-sidebar"></div>
+            <!-- <div class="font-controls">
               <button id="decrease-font-size" onclick="decreaseFontSize()">a</button>
               <button id="increase-font-size" onclick="increaseFontSize()">A</button>
               <button id="reset-font-size" onclick="document.body.style.fontSize = '16px'">=</button>
               <button id="toggle-theme" onclick="toggleTheme()">
                 <i class="fas fa-sun"></i>
               </button>
-            </div>
+            </div> -->
         </div>
-        
-   
-  </div>
-
+    </div>
+    </div>
     <script>
       const minFontSize = 14;
       const maxFontSize = 17;

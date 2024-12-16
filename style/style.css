@@ -24,6 +24,32 @@
     --button-hover: #4a5366;
 }
 
+.main-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.parent-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .main-sidebar {
+        width: 100%;
+        order: -1;
+    }
+    
+    .main-content {
+        padding: 1rem;
+    }
+}
+
 /* Base Styles */
 body {
     font-family: 'Consolas', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -45,18 +71,26 @@ body {
 }
 
 .main-content {
-    flex: 1;
+    flex: 1; 
 }
 
 /* Links */
 a {
     color: var(--link-color);
     text-decoration: none;
-    transition: color 0.2s;
+    position: relative;
+    padding: 0 2px;
+    background: linear-gradient(to bottom, transparent 50%, transparent 50%);
+    background-size: 100% 200%;
+    background-position: 0 0;
+    transition: color 0.2s ease, background-position 0.3s ease;
 }
 
 a:hover {
-    text-decoration: underline;
+    color: var(--bg-color);
+    background-image: linear-gradient(to bottom, transparent 50%, var(--string-color) 50%);
+    background-position: 0 100%;
+    text-decoration: none;
 }
 
 /* Sidebar Styles */
@@ -65,17 +99,14 @@ a:hover {
     padding: 20px;
     background-color: var(--sidebar-bg);
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: fit-content;
-    top: 20px;
-    margin-top: 110px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);    
     display: flex;
     flex-direction: column;
     align-items: left;
     overflow-x: auto;
     color: var(--key-color);
     border-left: 4px solid var(--string-color);
-
+    margin-top: -20px;
 }
 
 /* Font Controls */
@@ -106,7 +137,7 @@ a:hover {
     border-left: 4px solid var(--string-color);
 }
 
-.header-json {
+.header-json, .header-image {
     background-color: var(--pre-bg);
     color: var(--pre-text);
     padding: 20px;
@@ -116,6 +147,24 @@ a:hover {
     margin-bottom: 40px;
     text-align: center;
     font-size: larger;
+    height: 25px;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid var(--string-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);    
+}
+
+.profile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 250, 67, 0.3);
+    border-color: var(--link-hover);
 }
 
 /* YAML Syntax Highlighting */
