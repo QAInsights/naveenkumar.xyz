@@ -201,6 +201,10 @@ function displayEducation(key, value) {
                 value.textContent = entry.value;
                 value.innerHTML = value.innerHTML + breakLine;
                 parentElement.appendChild(value);
+
+                if (index === entries.length - 1) {
+                    parentElement.appendChild(document.createElement('br'));
+                }
             });
         });
     }
@@ -248,6 +252,10 @@ function displayExperience(key, value) {
                 companyValue.textContent = entry.value;
                 companyValue.innerHTML = companyValue.innerHTML + breakLine;
                 parentElement.appendChild(companyValue);
+
+                if (index === entries.length - 1) {
+                    parentElement.appendChild(document.createElement('br'));
+                }
             });            
         });
 
@@ -292,7 +300,7 @@ function displayStack(key, value) {
             { key: 'tools_os', value: value.tools_os }
         ];
         
-        entries.forEach(entry => {
+        entries.forEach((entry, index) => {
             const container = document.createElement('div');
             
             // Create and append key
@@ -306,8 +314,12 @@ function displayStack(key, value) {
             valueSpan.classList.add('stack-value');
             valueSpan.textContent = checkForSpace(entry.value);
             container.appendChild(valueSpan);
-            
             stackContainer.appendChild(container);
+
+            if (index === entries.length - 1) {
+                console.log('last');
+                stackContainer.appendChild(document.createElement('br'));
+            }
         });
         
         parentElement.appendChild(stackContainer);
