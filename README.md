@@ -42,7 +42,7 @@ naveenkumar-xyz/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/naveenkumar-xyz/naveenkumar-xyz.github.io.git
+   git clone https://github.com/QAInsights/naveenkumar.xyz.git
    ```
 
 2. Open `index.html` in your browser or use a local server:
