@@ -33,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const header = document.querySelector('.header');
         header.style.boxShadow = '0 0 0px #0b57ee';
     });
+
+    displayCopyright();
 });
 
 const loadYamlFile = async () => {
@@ -349,5 +351,16 @@ const loadHeaderJson = async () => {
 loadHeaderJson();
 
  
+function displayCopyright() {
+    const parentElement = document.getElementsByClassName('footer')[0];
+    const currentYear = new Date().getFullYear();
+
+    const copyright = document.createElement('span');
+    copyright.classList.add('copyright');
+
+    copyright.textContent = `© ${currentYear} - NaveenKumar Namachivayam`;
+    parentElement.appendChild(copyright);
+}
+
 
  

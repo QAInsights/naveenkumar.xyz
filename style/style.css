@@ -118,7 +118,7 @@ a:hover {
     margin-top: -20px;
 }
 .footer {
-    text-align: left;
+    text-align: center;
     border-radius: 4px;
     color: var(--key-color);
     margin-top: 10px;
@@ -355,3 +355,5 @@ a:hover {
     margin-left: 20px;
     line-height: 2;
 }
+
+ 
