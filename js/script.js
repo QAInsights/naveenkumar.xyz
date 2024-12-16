@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const profile = document.querySelector('.profile');
     profile.addEventListener('mouseover', () => {
        const header = document.querySelector('.header');
-       header.style.boxShadow = '0 0 20px #0b57ee';
+       header.style.boxShadow = '0 0 10px #0b57ee';
     });
     profile.addEventListener('mouseout', () => {
         const header = document.querySelector('.header');
