@@ -17,15 +17,6 @@
     --array-color: #61afef;
 }
 
-.inconsolata-<uniquifier> {
-  font-family: "Inconsolata", monospace;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-}
-
 .dark-mode {
     --bg-color: #1a1a1a;
     --text-color: #f0f0f0;
@@ -47,15 +38,26 @@
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
+        order: 2;
     }
-    
-    .main-sidebar {
-        width: 100%;
-        order: -1;
+
+    .header-image, .header-json { 
+        padding: 1px; 
+        margin-bottom: 20px; 
+        margin-top: -20px;
     }
-    
     .main-content {
+        order: 1;
         padding: 1rem;
+    }
+
+    .main-sidebar {
+        order: 2;
+        padding: 1rem;
+        width: 96%;
+    }
+    .social-sidebar {
+       width: 100%;
     }
 }
 
@@ -104,7 +106,7 @@ a:hover {
 
 /* Sidebar Styles */
 .social-sidebar {
-    width: 250px;
+    width: calc(100% - 40px);  /* Account for padding */
     padding: 20px;
     background-color: var(--sidebar-bg);
     border-radius: 8px;
@@ -117,7 +119,9 @@ a:hover {
     border-left: 4px solid var(--string-color);
     margin-top: -20px;
 }
+
 .footer {
+    width: calc(100% - 10px);  /* Account for padding */
     text-align: center;
     border-radius: 4px;
     color: var(--key-color);
@@ -171,11 +175,11 @@ a:hover {
     text-align: center;
     font-size: larger;
     height: 25px;
-    text-align: right;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .profile {
     width: 40px;
     height: 40px;
