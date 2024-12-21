@@ -41,11 +41,19 @@
         order: 2;
     }
 
-    .header-image, .header-json { 
+    .header-image { 
+        padding: 1px; 
+        margin-bottom: 20px; 
+        margin-top: -58px;
+        width: calc(100% - 48px);
+    }
+     .header-json { 
         padding: 1px; 
         margin-bottom: 20px; 
         margin-top: -20px;
+        width:  calc(100% - 44px);
     }
+
     .main-content {
         order: 1;
         padding: 1rem;
@@ -55,9 +63,6 @@
         order: 2;
         padding: 1rem;
         width: 96%;
-    }
-    .social-sidebar {
-       width: 100%;
     }
 }
 
@@ -106,7 +111,7 @@ a:hover {
 
 /* Sidebar Styles */
 .social-sidebar {
-    width: calc(100% - 40px);  /* Account for padding */
+    width: calc(100% - 44px);  /* Account for padding */
     padding: 20px;
     background-color: var(--sidebar-bg);
     border-radius: 8px;
@@ -118,10 +123,11 @@ a:hover {
     color: var(--key-color);
     border-left: 4px solid var(--string-color);
     margin-top: -20px;
+    margin-bottom: -24px;
 }
 
 .footer {
-    width: calc(100% - 10px);  /* Account for padding */
+    width: calc(100% - 44ppx);  /* Account for padding */
     text-align: center;
     border-radius: 4px;
     color: var(--key-color);
@@ -131,6 +137,8 @@ a:hover {
     background-color: var(--sidebar-bg);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-left: 4px solid var(--link-color);
+    border-radius: 8px;
+
 }
 
 .footer > a {
@@ -171,13 +179,14 @@ a:hover {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-left: 4px solid var(--link-color);
-    margin-bottom: 40px;
+    margin-bottom: 5px;
     text-align: center;
     font-size: larger;
     height: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
 }
 
 .profile {
