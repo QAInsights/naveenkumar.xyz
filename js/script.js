@@ -341,7 +341,11 @@ const loadHeaderJson = async () => {
        const data = JSON.parse(jsonText);
        const preHeader = document.getElementsByClassName('header')[0];  
        preHeader.classList.add('header-json'); 
-       preHeader.textContent = JSON.stringify(data, null, 2);
+       const contentDiv = document.createElement('div');
+       contentDiv.style.flex = '1';
+       contentDiv.style.textAlign = 'center';
+       contentDiv.textContent = JSON.stringify(data, null, 2);
+       preHeader.appendChild(contentDiv);
      } catch (error) {
         console.error('Error loading JSON:', error);
     }        
@@ -358,7 +362,7 @@ function displayCopyright() {
     const copyright = document.createElement('span');
     copyright.classList.add('copyright');
 
-    copyright.textContent = `© ${currentYear} - NaveenKumar Namachivayam`;
+    copyright.textContent = ` ${currentYear} - NaveenKumar Namachivayam`;
     parentElement.appendChild(copyright);
 }
 
