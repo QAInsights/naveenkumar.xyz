@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     // Find all experience and education entries
     const entries = document.querySelectorAll('.experience-entry, .education-entry');
     
@@ -25,15 +25,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // profile hover
     const profile = document.querySelector('.profile');
-    profile.addEventListener('mouseover', () => {
-       const header = document.querySelector('.header');
-       header.style.boxShadow = '0 0 10px #0b57ee';
-    });
-    profile.addEventListener('mouseout', () => {
-        const header = document.querySelector('.header');
-        header.style.boxShadow = '0 0 0px #0b57ee';
-    });
+    if (profile) {
+        profile.addEventListener('mouseover', () => {
+            const header = document.querySelector('.header');
+            header.style.boxShadow = '0 0 10px #0b57ee';
+        });
+        profile.addEventListener('mouseout', () => {
+            const header = document.querySelector('.header');
+            header.style.boxShadow = '0 0 0px #0b57ee';
+        });
+    }
 
+    // Load all content
+    await loadYamlFile();
+    await loadConnectYamlFile();
+    await loadProjectsYamlFile();
+    await loadHeaderJson();
+    
+    // Load RSS feed after other content is loaded
+    checkAndRefreshRSSFeed();
+    
     displayCopyright();
 });
 
@@ -55,7 +66,7 @@ const loadYamlFile = async () => {
 };
 
 // Call the function
-loadYamlFile();
+// loadYamlFile();
 
 const loadConnectYamlFile = async () => {
     try {
@@ -69,7 +80,7 @@ const loadConnectYamlFile = async () => {
     }
 };
 
-loadConnectYamlFile();
+// loadConnectYamlFile();
 
 const loadProjectsYamlFile = async () => {
     try {
@@ -83,7 +94,7 @@ const loadProjectsYamlFile = async () => {
     }
 };
 
-loadProjectsYamlFile();
+// loadProjectsYamlFile();
 
 function displayProjects(key, value) {
     const parentElement = document.getElementsByClassName('social-sidebar')[0];
@@ -263,6 +274,107 @@ function displayExperience(key, value) {
 
     }
 }
+
+async function fetchRSSFeed() {
+    try {
+        console.log('Fetching RSS feed...');
+        // Using a CORS proxy to fetch the RSS feed
+        const corsProxy = 'https://api.allorigins.win/raw?url=';
+        const rssFeedUrl = 'https://qainsights.com/feed/';
+        const response = await fetch(corsProxy + encodeURIComponent(rssFeedUrl));
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const xmlText = await response.text();
+        console.log('RSS feed fetched successfully');
+        
+        // Parse XML to DOM
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+        
+        if (xmlDoc.querySelector('parsererror')) {
+            throw new Error('XML parsing error');
+        }
+        
+        // Convert to our YAML structure
+        const items = xmlDoc.querySelectorAll('item');
+        console.log(`Found ${items.length} items in feed`);
+        
+        const articles = Array.from(items).slice(0, 5).map(item => ({
+            title: item.querySelector('title')?.textContent || 'Untitled',
+            date: new Date(item.querySelector('pubDate')?.textContent || '').toISOString().split('T')[0],
+            link: item.querySelector('link')?.textContent || '#',
+            description: item.querySelector('description')?.textContent.replace(/<[^>]*>/g, '').substring(0, 150) + '...' || ''
+        }));
+
+        // Create YAML structure
+        const rssData = {
+            rss_feed: {
+                url: rssFeedUrl,
+                title: xmlDoc.querySelector('channel > title')?.textContent || 'Latest Blog Posts',
+                description: xmlDoc.querySelector('channel > description')?.textContent || '',
+                articles: articles
+            }
+        };
+
+        // Display the feed
+        displayBlog('rss_feed', rssData.rss_feed);
+        console.log('RSS feed displayed successfully');
+        
+        // Cache the feed data
+        localStorage.setItem('rssFeedCache', JSON.stringify({
+            timestamp: Date.now(),
+            data: rssData
+        }));
+
+    } catch (error) {
+        console.error('Error fetching RSS feed:', error);
+        // If fetch fails, try to use cached data
+        const cached = localStorage.getItem('rssFeedCache');
+        if (cached) {
+            console.log('Using cached RSS feed data');
+            const { data } = JSON.parse(cached);
+            displayBlog('rss_feed', data.rss_feed);
+        }
+    }
+}
+
+function displayBlog(key, value) {
+    if (!value) return;
+    
+    // Get the social-sidebar element
+    const socialSidebar = document.querySelector('.social-sidebar');
+    if (!socialSidebar) return;
+    
+    let content = '';
+    content += `<div class="blog-section">`;
+    content += `<span class="key">recent_posts</span><span class="colon">:</span>${breakLine}`;
+    
+    // Display articles
+    value.articles.forEach(article => {
+        content += `<div class="blog-item">`;
+        content += `${indent}<span class="array">-</span>`;
+        content += `<span class="string clickable-link" data-url="${article.link}">${article.title}</span>`;
+        content += `</div>`;
+    });
+    
+    content += '</div>';
+    
+    // Append to social-sidebar
+    socialSidebar.insertAdjacentHTML('beforeend', content);
+    
+    // Make links clickable
+    socialSidebar.querySelectorAll('.clickable-link').forEach(link => {
+        link.style.cursor = 'pointer';
+        link.addEventListener('click', () => {
+            const url = link.getAttribute('data-url');
+            window.open(url, '_blank');
+        });
+    });
+}
+
 function displayAbout(key, value) {
     const parentElement = document.getElementsByClassName('content-yaml')[0];
     const aboutKey = document.createElement('span');
@@ -332,6 +444,43 @@ function checkForSpace(item) {
     return JSON.stringify(item);
 }
 
+function checkAndRefreshRSSFeed() {
+    const cached = localStorage.getItem('rssFeedCache');
+    if (cached) {
+        const { timestamp } = JSON.parse(cached);
+        // Refresh if cache is older than 1 hour
+        if (Date.now() - timestamp > 3600000) {
+            fetchRSSFeed();
+        } else {
+            const { data } = JSON.parse(cached);
+            displayBlog('rss_feed', data.rss_feed);
+        }
+    } else {
+        fetchRSSFeed();
+    }
+}
+
+// Initial load
+// checkAndRefreshRSSFeed();
+
+// Refresh feed every hour
+// setInterval(checkAndRefreshRSSFeed, 3600000);
+
+// Load blog YAML file
+const loadBlogYamlFile = async () => {
+    try {
+        const response = await fetch('data/blog.yaml');
+        const yamlText = await response.text();
+        const data = jsyaml.load(yamlText);
+        // displayBlog("rss_feed", data.rss_feed);
+    } catch (error) {
+        console.error('Error loading blog YAML:', error);
+    }
+};
+
+// Call the function to load blog data
+// loadBlogYamlFile();
+
 // Read header JSON
 const loadHeaderJson = async () => {
     try {
@@ -352,7 +501,7 @@ const loadHeaderJson = async () => {
      
 };
 
-loadHeaderJson();
+// loadHeaderJson();
 
  
 function displayCopyright() {
@@ -362,9 +511,6 @@ function displayCopyright() {
     const copyright = document.createElement('span');
     copyright.classList.add('copyright');
 
-    copyright.textContent = ` ${currentYear} - NaveenKumar Namachivayam`;
+    copyright.textContent = `${currentYear} - NaveenKumar Namachivayam`;
     parentElement.appendChild(copyright);
 }
-
-
- 
