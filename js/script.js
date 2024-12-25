@@ -350,7 +350,7 @@ function displayBlog(key, value) {
     
     let content = '';
     content += `<div class="blog-section">`;
-    content += `<span class="key">recent_posts</span><span class="colon">:</span>${breakLine}`;
+    content += `<span class="key">recent_posts:</span>${breakLine}`;
     
     // Display articles
     value.articles.forEach(article => {
