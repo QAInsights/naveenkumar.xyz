@@ -356,7 +356,7 @@ function displayBlog(key, value) {
     value.articles.forEach(article => {
         content += `<div class="blog-item">`;
         content += `${indent}<span class="array">-</span>`;
-        content += `<span class="string clickable-link" data-url="${article.link}">${article.title}</span>`;
+        content += `<span class="string clickable-link" data-url="${article.link}" title="${article.title}">${article.title}</span>`;
         content += `</div>`;
     });
     

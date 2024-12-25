@@ -60,6 +60,7 @@
  
     .header-json {
         font-size: medium;
+        word-wrap: break-word;
     }
     .container {
         flex-direction: column;
@@ -444,7 +445,6 @@ a:hover {
     padding-top: 15px;
     border-top: 1px solid var(--pre-bg);
     max-width: 280px;
-    font-size: 0.9em;
 }
 
 .social-sidebar .blog-item {
@@ -477,6 +477,36 @@ a:hover {
     color: var(--bg-color);
     background-image: linear-gradient(to bottom, transparent 50%, var(--string-color) 50%);
     background-position: 0 100%;
+}
+
+.social-sidebar .clickable-link[title] {
+    position: relative;
+}
+
+.social-sidebar .clickable-link[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background-color: var(--pre-bg);
+    color: var(--text-color);
+    font-size: 0.9em;
+    white-space: nowrap;
+    border-radius: 4px;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    opacity: 0;
+    animation: tooltipFade 0.2s ease forwards;
+}
+
+@keyframes tooltipFade {
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-4px);
+    }
 }
 
 @media (max-width: 768px) {
