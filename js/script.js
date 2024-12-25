@@ -278,43 +278,36 @@ function displayExperience(key, value) {
 async function fetchRSSFeed() {
     try {
         console.log('Fetching RSS feed...');
-        // Using a CORS proxy to fetch the RSS feed
-        const corsProxy = 'https://api.allorigins.win/raw?url=';
         const rssFeedUrl = 'https://qainsights.com/feed/';
-        const response = await fetch(corsProxy + encodeURIComponent(rssFeedUrl));
+        const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
+        
+        const response = await fetch(rss2jsonUrl);
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const xmlText = await response.text();
+        const data = await response.json();
         console.log('RSS feed fetched successfully');
         
-        // Parse XML to DOM
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-        
-        if (xmlDoc.querySelector('parsererror')) {
-            throw new Error('XML parsing error');
+        if (data.status !== 'ok') {
+            throw new Error('RSS parsing error');
         }
-        
-        // Convert to our YAML structure
-        const items = xmlDoc.querySelectorAll('item');
-        console.log(`Found ${items.length} items in feed`);
-        
-        const articles = Array.from(items).slice(0, 5).map(item => ({
-            title: item.querySelector('title')?.textContent || 'Untitled',
-            date: new Date(item.querySelector('pubDate')?.textContent || '').toISOString().split('T')[0],
-            link: item.querySelector('link')?.textContent || '#',
-            description: item.querySelector('description')?.textContent.replace(/<[^>]*>/g, '').substring(0, 150) + '...' || ''
+
+        // Convert to our structure
+        const articles = data.items.slice(0, 5).map(item => ({
+            title: item.title || 'Untitled',
+            date: new Date(item.pubDate).toISOString().split('T')[0],
+            link: item.link || '#',
+            description: item.description?.replace(/<[^>]*>/g, '').substring(0, 150) + '...' || ''
         }));
 
-        // Create YAML structure
+        // Create feed structure
         const rssData = {
             rss_feed: {
                 url: rssFeedUrl,
-                title: xmlDoc.querySelector('channel > title')?.textContent || 'Latest Blog Posts',
-                description: xmlDoc.querySelector('channel > description')?.textContent || '',
+                title: data.feed.title || 'Latest Blog Posts',
+                description: data.feed.description || '',
                 articles: articles
             }
         };
