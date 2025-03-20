@@ -1,13 +1,18 @@
 projects:
-  - name: PerfGPT
-    url: https://www.perfgpt.ai/
-  - name: Kel
+  - name: ✨ Feather Wand
+    url: https://www.jmeter.ai/
+  - name: 🤖 Kel
     url: https://kel.qainsights.com/
-  - name: Hamster
+  - name: 🪶 Hamster
     url: https://hamster.qainsights.com/
-  - name: JMeter Docker Extension
+  - name: 🐬 JMeter Light Weight Docker Image
+    url: "docker pull qainsights/jmeter"
+  - name: 🐬 JMeter Docker Extension
     url: https://hub.docker.com/extensions/qainsights/jmeter-docker-extension
-  - name: Clip It!
+  - name: 📋 Clip It!
     url: https://chromewebstore.google.com/detail/clip-it/dmacanhpegjjgmicfbinaafcnjaigecf
-  - name: Confetti Celebrations
+  - name: 🎊 Confetti Celebrations
     url: https://chromewebstore.google.com/detail/confetti-celebrations/jlnaaichmlfhooionenmhdnimhdmoijb
+  - name: 🔗 Quick Links
+    url: https://chromewebstore.google.com/detail/quick-links/jcpngbilapanldphljagkbkjkmkmeiii 
+
