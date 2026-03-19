@@ -174,14 +174,17 @@ function displayCertifications(key, value) {
 
 function displayEducation(key, value) {
     const parentElement = document.getElementsByClassName('content-yaml')[0];
-    const educationKey = document.createElement('span');
-    educationKey.classList.add('key');
-    educationKey.textContent = key + ":";
-    educationKey.innerHTML = educationKey.innerHTML + breakLine;
-    parentElement.appendChild(educationKey);
+    const sectionKey = document.createElement('span');
+    sectionKey.classList.add('key');
+    sectionKey.textContent = key + ":";
+    sectionKey.innerHTML = sectionKey.innerHTML + breakLine;
+    parentElement.appendChild(sectionKey);
     
     if(Object.keys(value).length > 0) { 
         Object.values(value).forEach((item) => {
+            const container = document.createElement('div');
+            container.classList.add('entry-container');
+
             const entries = [
                 { key: 'degree', value: item.degree },
                 { key: 'university', value: item.university },
@@ -189,50 +192,40 @@ function displayEducation(key, value) {
             ];
             
             entries.forEach((entry, index) => {
-                const key = document.createElement('span');
-                key.classList.add('key');
-                key.textContent = entry.key + ":";
-                if (index === 0) {
-                    key.innerHTML = indent + "-" + indent + key.innerHTML;
-                }
-                else {
-                    key.innerHTML = indent + indent + space + key.innerHTML;
-                }
-                parentElement.appendChild(key);
-                
-                const value = document.createElement('span');
-                value.classList.add('string');
+                const row = document.createElement('div');
 
-                if(index === 0) {
-                    value.style.marginLeft = '35px';
-                }
-                else if (index === 2) {
-                    value.classList.remove('string');
-                    value.classList.add('education-year');
-                }
-                
-                value.textContent = entry.value;
-                value.innerHTML = value.innerHTML + breakLine;
-                parentElement.appendChild(value);
+                const keySpan = document.createElement('span');
+                keySpan.classList.add('entry-key');
+                keySpan.textContent = (index === 0 ? '- ' : '   ') + entry.key + ":";
+                row.appendChild(keySpan);
 
-                if (index === entries.length - 1) {
-                    parentElement.appendChild(document.createElement('br'));
-                }
+                const valueSpan = document.createElement('span');
+                valueSpan.classList.add('entry-value');
+                valueSpan.textContent = entry.value;
+                row.appendChild(valueSpan);
+
+                container.appendChild(row);
             });
+
+            parentElement.appendChild(container);
         });
+        parentElement.appendChild(document.createElement('br'));
     }
 }
 
 function displayExperience(key, value) {
     const parentElement = document.getElementsByClassName('content-yaml')[0];
-    const experienceKey = document.createElement('span');
-    experienceKey.classList.add('key');
-    experienceKey.textContent = key + ":";
-    experienceKey.innerHTML = experienceKey.innerHTML + breakLine;
-    parentElement.appendChild(experienceKey);
+    const sectionKey = document.createElement('span');
+    sectionKey.classList.add('key');
+    sectionKey.textContent = key + ":";
+    sectionKey.innerHTML = sectionKey.innerHTML + breakLine;
+    parentElement.appendChild(sectionKey);
     
     if(Object.keys(value).length > 0) { 
         Object.values(value).forEach(item => {
+            const container = document.createElement('div');
+            container.classList.add('entry-container');
+
             const entries = [
                 { key: 'company', value: item.company },
                 { key: 'position', value: item.position },
@@ -240,97 +233,24 @@ function displayExperience(key, value) {
             ];
             
             entries.forEach((entry, index) => {
-                const companyKey = document.createElement('span');
-                companyKey.classList.add('key');
-                companyKey.textContent = entry.key + ":";
-                
-                if (index === 0) {
-                    companyKey.innerHTML = indent + "-" + indent + companyKey.innerHTML;
-                }
-                else {
-                    companyKey.innerHTML = indent + indent + space + companyKey.innerHTML;
-                }
-                parentElement.appendChild(companyKey);
-                
-                const companyValue = document.createElement('span');
-                companyValue.classList.add('string');
-                if (index === 0) {
-                    companyValue.style.marginLeft = '10px';
-                } 
+                const row = document.createElement('div');
 
-                if(index === 2) {
-                    companyValue.classList.remove('string');
-                    companyValue.classList.add('year');
-                }
-                companyValue.textContent = entry.value;
-                companyValue.innerHTML = companyValue.innerHTML + breakLine;
-                parentElement.appendChild(companyValue);
+                const keySpan = document.createElement('span');
+                keySpan.classList.add('entry-key');
+                keySpan.textContent = (index === 0 ? '- ' : '   ') + entry.key + ":";
+                row.appendChild(keySpan);
 
-                if (index === entries.length - 1) {
-                    parentElement.appendChild(document.createElement('br'));
-                }
-            });            
+                const valueSpan = document.createElement('span');
+                valueSpan.classList.add('entry-value');
+                valueSpan.textContent = entry.value;
+                row.appendChild(valueSpan);
+
+                container.appendChild(row);
+            });
+
+            parentElement.appendChild(container);
         });
-
-    }
-}
-
-async function fetchRSSFeed() {
-    try {
-        console.log('Fetching RSS feed...');
-        const rssFeedUrl = 'https://qainsights.com/feed/';
-        const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
-        
-        const response = await fetch(rss2jsonUrl);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        console.log('RSS feed fetched successfully');
-        
-        if (data.status !== 'ok') {
-            throw new Error('RSS parsing error');
-        }
-
-        // Convert to our structure
-        const articles = data.items.slice(0, 5).map(item => ({
-            title: item.title || 'Untitled',
-            date: new Date(item.pubDate).toISOString().split('T')[0],
-            link: item.link || '#',
-            description: item.description?.replace(/<[^>]*>/g, '').substring(0, 150) + '...' || ''
-        }));
-
-        // Create feed structure
-        const rssData = {
-            rss_feed: {
-                url: rssFeedUrl,
-                title: data.feed.title || 'Latest Blog Posts',
-                description: data.feed.description || '',
-                articles: articles
-            }
-        };
-
-        // Display the feed
-        displayBlog('rss_feed', rssData.rss_feed);
-        console.log('RSS feed displayed successfully');
-        
-        // Cache the feed data
-        localStorage.setItem('rssFeedCache', JSON.stringify({
-            timestamp: Date.now(),
-            data: rssData
-        }));
-
-    } catch (error) {
-        console.error('Error fetching RSS feed:', error);
-        // If fetch fails, try to use cached data
-        const cached = localStorage.getItem('rssFeedCache');
-        if (cached) {
-            console.log('Using cached RSS feed data');
-            const { data } = JSON.parse(cached);
-            displayBlog('rss_feed', data.rss_feed);
-        }
+        parentElement.appendChild(document.createElement('br'));
     }
 }
 

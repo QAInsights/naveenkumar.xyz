@@ -23,8 +23,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
     <script src="js/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <!-- for the chat widget -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://qainsights.github.io/rag-qainsights-chat/styles.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+
+
 </head>
-<body class="dark-mode">
+<body>
     <div class="parent-container">
         <div class="container">
             <div class="main-content">
@@ -48,7 +54,7 @@
                 <div class="copyright"></div>
             </div>
         </div>
-    </div>
+      </div>
     </div>
     <script>
       const minFontSize = 15;
@@ -79,19 +85,62 @@
 
       // add function to toggle between light and dark mode
       function toggleTheme() {
+          console.log('Toggle theme clicked');
           const body = document.body;
           const themeIcon = document.querySelector('#toggle-theme i');
           body.classList.toggle('dark-mode');
+          console.log('Body classes after toggle:', body.className);
           
           // Toggle between sun and moon icons
           if (body.classList.contains('dark-mode')) {
               themeIcon.classList.replace('fa-sun', 'fa-moon');
+              console.log('Switched to light mode');
           } else {
               themeIcon.classList.replace('fa-moon', 'fa-sun');
+              console.log('Switched to dark mode');
           }
       }
 
     </script>
+    
+    <!-- QAInsights Chat Widget -->
+    <div id="dosa-chat-root">
+      <button id="dosa-bubble" aria-label="Open chat">
+        <div id="dosa-badge"></div>
+      </button>
+      <div id="dosa-window" role="dialog" aria-label="Chat with QAInsights assistant">
+        <div id="dosa-header">
+          <div class="dosa-avatar">QA</div>
+          <div class="dosa-header-info">
+            <div class="dosa-header-name">QAInsights Knowledge Base</div>
+            <div class="dosa-header-status">
+              <div class="dosa-status-dot"></div>
+              <span>ONLINE</span>
+            </div>
+          </div>
+          <button id="dosa-theme-btn" title="Toggle theme">DARK MODE</button>
+          <button id="dosa-clear-btn" title="Clear chat history">RESET</button>
+        </div>
+        <div id="dosa-messages">
+          <div class="dosa-welcome">
+            <div class="dosa-welcome-icon"></div>
+            <h3>QUERY EXAMPLES</h3>
+          </div>
+          <div class="dosa-suggestions">
+            <button class="dosa-suggestion-btn">Who is the author of this blog?</button>
+            <button class="dosa-suggestion-btn">What are the main topics covered?</button>
+            <button class="dosa-suggestion-btn">QA testing best practices?</button>
+          </div>
+        </div>
+        <div id="dosa-input-area">
+          <div id="dosa-input-row">
+            <textarea id="dosa-input" placeholder="$ query QAInsights knowledge base..." rows="1"></textarea>
+            <button id="dosa-send" aria-label="Send"></button>
+          </div>
+          <div id="dosa-footer-note">RAG-powered by QAInsights Knowledge Base</div>
+        </div>
+      </div>
+    </div>
+    <script src="https://qainsights.github.io/rag-qainsights-chat/chat.js"></script>
 </body>
 </html>
-
