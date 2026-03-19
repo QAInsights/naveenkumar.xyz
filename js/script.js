@@ -92,6 +92,7 @@ const loadProjectsYamlFile = async () => {
     } catch (error) {
         console.error('Error loading YAML:', error);
     }
+
 };
 
 // loadProjectsYamlFile();
@@ -145,6 +146,8 @@ function displayConnect(key, value) {
             parentElement.appendChild(connect);
         });
     }
+    // add a blank line
+    parentElement.appendChild(document.createElement('br'));
 }
 
 const indent = '&nbsp;'.repeat(2);
@@ -255,7 +258,7 @@ function displayExperience(key, value) {
 }
 
 function displayBlog(key, value) {
-    if (!value) return;
+    if (!value || !value.items) return;
     
     // Get the social-sidebar element
     const socialSidebar = document.querySelector('.social-sidebar');
@@ -265,8 +268,8 @@ function displayBlog(key, value) {
     content += `<div class="blog-section">`;
     content += `<span class="key">recent_posts:</span>${breakLine}`;
     
-    // Display articles
-    value.articles.forEach(article => {
+    // Display articles - RSS2JSON uses 'items' not 'articles'
+    value.items.forEach(article => {
         content += `<div class="blog-item">`;
         content += `${indent}<span class="array">-</span>`;
         content += `<span class="string clickable-link" data-url="${article.link}" title="${article.title}">${article.title}</span>`;
@@ -357,6 +360,23 @@ function checkForSpace(item) {
     return JSON.stringify(item);
 }
 
+async function fetchRSSFeed() {
+    try {
+        const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://qainsights.com/feed/');
+        const data = await response.json();
+        
+        // Cache the data
+        localStorage.setItem('rssFeedCache', JSON.stringify({
+            timestamp: Date.now(),
+            data: data
+        }));
+        
+        displayBlog('rss_feed', data);
+    } catch (error) {
+        console.error('Error fetching RSS feed:', error);
+    }
+}
+
 function checkAndRefreshRSSFeed() {
     const cached = localStorage.getItem('rssFeedCache');
     if (cached) {
@@ -366,7 +386,7 @@ function checkAndRefreshRSSFeed() {
             fetchRSSFeed();
         } else {
             const { data } = JSON.parse(cached);
-            displayBlog('rss_feed', data.rss_feed);
+            displayBlog('rss_feed', data);
         }
     } else {
         fetchRSSFeed();
@@ -418,12 +438,13 @@ const loadHeaderJson = async () => {
 
  
 function displayCopyright() {
-    const parentElement = document.getElementsByClassName('footer')[0];
-    const currentYear = new Date().getFullYear();
-
-    const copyright = document.createElement('span');
-    copyright.classList.add('copyright');
-
-    copyright.textContent = `${currentYear} - NaveenKumar Namachivayam`;
-    parentElement.appendChild(copyright);
+    const copyrightElement = document.getElementById('copyright');
+    if (copyrightElement) {
+        const currentYear = new Date().getFullYear();
+        let copyrightText = `${currentYear} © NaveenKumar Namachivayam.`;
+        copyrightText += '<br>';
+        copyrightText += 'All rights reserved.';
+        copyrightElement.innerHTML = copyrightText;
+        
+    }
 }
