@@ -106,9 +106,29 @@ body.dark-mode {
         margin-bottom: -40px;
     }
     .content-yaml, pre {
-        width: calc(100% - 44px);
+        width: 100%;
+        box-sizing: border-box;
         margin: 0 0 15px 0;
         padding: 15px;
+    }
+}
+@media screen and (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    .parent-container {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0;
+        margin: 0;
+    }
+    .profile {
+        width: 80px;
+        height: 80px;
+    }
+    #decrease-font-size, #increase-font-size, #reset-font-size, #toggle-theme {
+        padding: 6px 8px;
+        font-size: 14px;
     }
 }
 
