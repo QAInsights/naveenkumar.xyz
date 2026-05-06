@@ -1,0 +1,26 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "naveenkumar.xyz"
+        }
+      ],
+      "destination": "https://dosa.dev/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.naveenkumar.xyz"
+        }
+      ],
+      "destination": "https://dosa.dev/$1",
+      "permanent": true
+    }
+  ]
+}
