@@ -17,3 +17,11 @@ projects:
     url: https://chromewebstore.google.com/detail/quick-links/jcpngbilapanldphljagkbkjkmkmeiii
   - name: ☁️ Salesforce Turbo Link
     url: https://chromewebstore.google.com/detail/salesforce-turbo-link/nfdefnkljkgcafhicidcdhdkffblpiml
+  - name: 🗺️ PerfAtlas
+    url: https://plugins.jmeter.ai
+  - name: 🚀 DashBuster
+    url: https://chromewebstore.google.com/detail/dashbuster/pnfhimkhinoecknjhlggdbgoajcogfll
+  - name: 🕵️ MetaHide
+    url: https://chromewebstore.google.com/detail/metahide/hodomjpjmaifjigbaobgabhpgkhifpib
+  - name: 📜 Valluvar AI
+    url: https://huggingface.co/spaces/qainsights/valluvar-or-ai
