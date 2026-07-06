@@ -5,6 +5,10 @@ projects:
     url: https://achu.app
   - name: ⚡ I am speed.
     url: https://iamspeed.dev
+  - name: 🗺️ PerfAtlas
+    url: https://plugins.jmeter.ai
+  - name: 🌿 Modern JMeter Docs
+    url: https://docs.jmeter.ai
   - name: 🤖 Kel
     url: https://kel.qainsights.com/
   - name: 🪶 Hamster
@@ -21,8 +25,6 @@ projects:
     url: https://chromewebstore.google.com/detail/quick-links/jcpngbilapanldphljagkbkjkmkmeiii
   - name: ☁️ Salesforce Turbo Link
     url: https://chromewebstore.google.com/detail/salesforce-turbo-link/nfdefnkljkgcafhicidcdhdkffblpiml
-  - name: 🗺️ PerfAtlas
-    url: https://plugins.jmeter.ai
   - name: 🚀 DashBuster
     url: https://chromewebstore.google.com/detail/dashbuster/pnfhimkhinoecknjhlggdbgoajcogfll
   - name: 🕵️ MetaHide
