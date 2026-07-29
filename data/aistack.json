@@ -1,0 +1,20 @@
+{
+  "aistack": [
+    { "name": "Devin" },
+    { "name": "Qwen" },
+    { "name": "Gemini" },
+    { "name": "DeepSeek" },
+    { "name": "Orca" },
+    { "name": "Command Code" },
+    { "name": "Pi" },
+    { "name": "Claude Code" },
+    { "name": "Codex" },
+    { "name": "OpenCode" },
+    { "name": "Grok" },
+    { "name": "Antigravity" },
+    { "name": "Freebuff" },
+    { "name": "Poolside" },
+    { "name": "Reasonix" },
+    { "name": "OpenWorker" }
+  ]
+}

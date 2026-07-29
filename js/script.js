@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     await loadYamlFile();
     await loadConnectYamlFile();
     await loadProjectsYamlFile();
+    await loadAiStackJsonFile();
     await loadHeaderJson();
     
     // Load RSS feed after other content is loaded
@@ -148,6 +149,47 @@ function displayConnect(key, value) {
     }
     // add a blank line
     parentElement.appendChild(document.createElement('br'));
+}
+
+const loadAiStackJsonFile = async () => {
+    try {
+        const response = await fetch('data/aistack.json');
+        const jsonText = await response.text();
+        const data = JSON.parse(jsonText);
+        displayAiStack("ai stack", data.aistack);
+        return data;
+    } catch (error) {
+        console.error('Error loading AI stack JSON:', error);
+    }
+};
+
+// loadAiStackJsonFile();
+
+function displayAiStack(key, value) {
+    const parentElement = document.getElementsByClassName('social-sidebar')[0];
+    // add a blank line
+    parentElement.appendChild(document.createElement('br'));
+    
+    const aiKey = document.createElement('span');
+    aiKey.classList.add('key');
+    aiKey.textContent = key + ":";
+    aiKey.innerHTML = aiKey.innerHTML + breakLine;
+    parentElement.appendChild(aiKey);
+    
+    if (Object.keys(value).length > 0) { 
+        Object.values(value).forEach(item => {
+            const aiTool = document.createElement('span');
+            aiTool.classList.add('string');
+            const aiToolLink = document.createElement('a');
+            aiToolLink.href = item.url || "#";
+            aiToolLink.textContent = item.name;
+            aiToolLink.target = "_blank";
+            aiTool.appendChild(aiToolLink);
+            aiTool.style.marginLeft = '25px';
+            aiTool.innerHTML = "-" + indent + aiTool.innerHTML + breakLine;
+            parentElement.appendChild(aiTool);
+        });
+    }
 }
 
 const indent = '&nbsp;'.repeat(2);
