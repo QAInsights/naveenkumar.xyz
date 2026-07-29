@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Shell(npx --yes http-server -p 8080 -c-1)",
-      "Shell(git:*)"
+      "Shell(git:*)",
+      "Shell(git commit -F - <<'EOF' Add AI stack section to sidebar - Created data/aistack.json with configurable list of AI tools - Added displayAiStack() function in script.js - Added ai stack section in sidebar matching connect/projects style Co-authored-by: CommandCodeBot <noreply@commandcode.ai> EOF)"
     ],
     "deny": [],
     "defaultMode": "default"

@@ -255,6 +255,11 @@ a:hover {
     height: 56px;
 }
 
+.header-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+}
+
 .profile {
     width: 40px;
     height: 40px;

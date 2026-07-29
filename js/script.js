@@ -459,7 +459,6 @@ const loadBlogYamlFile = async () => {
 // Read header JSON
 const loadHeaderJson = async () => {
     try {
-       // read head.json
        const response = await fetch('data/head.json');
        const jsonText = await response.text();
        const data = JSON.parse(jsonText);
@@ -468,7 +467,12 @@ const loadHeaderJson = async () => {
        const contentDiv = document.createElement('div');
        contentDiv.style.flex = '1';
        contentDiv.style.textAlign = 'center';
-       contentDiv.textContent = JSON.stringify(data, null, 2);
+       
+       // Render structured HTML with the name wrapped for styling
+       Object.entries(data).forEach(([key, value]) => {
+         contentDiv.innerHTML += `<div><span class="string">${key}:</span> <span class="header-name">${value}</span></div>`;
+       });
+       
        preHeader.appendChild(contentDiv);
      } catch (error) {
         console.error('Error loading JSON:', error);
