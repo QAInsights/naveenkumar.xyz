@@ -1,0 +1,9 @@
+# dosa.dev
+
+> Personal site of NaveenKumar N (QAInsights): performance engineering, AI tooling and open-source Chrome extensions.
+
+## Links
+
+- [Prompticon](https://dosa.dev/prompticon/): free, open-source (MIT) Chrome extension that adds a customizable quick-reply toolbar above the composer in ChatGPT, Claude, Gemini, Grok, Mistral Le Chat, Qwen Chat, Meta AI and DeepSeek; 100% client-side with zero tracking
+- [QAInsights](https://qainsights.com): performance testing tools and JMeter resources
+- [GitHub QAInsights](https://github.com/QAInsights): open-source projects including the Prompticon source code
