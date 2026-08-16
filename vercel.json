@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/prompticon",
+      "destination": "/prompticon/",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "has": [
         {
@@ -21,6 +26,16 @@
       ],
       "destination": "https://dosa.dev/$1",
       "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/prompticon/",
+      "destination": "https://prompticon-site.vercel.app/"
+    },
+    {
+      "source": "/prompticon/:path*",
+      "destination": "https://prompticon-site.vercel.app/:path*"
     }
   ]
 }
