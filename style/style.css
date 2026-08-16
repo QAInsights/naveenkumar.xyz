@@ -1,4 +1,7 @@
 :root {
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body: 'Instrument Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Cascadia Code', Consolas, 'Courier New', monospace;
     --bg-color: #1a1a1a;
     --text-color: #f0f0f0;
     --sidebar-bg: #282c34;
@@ -133,7 +136,7 @@ body.dark-mode {
 }
 
 body {
-    font-family: 'Lora', 'Inter', 'Space Grotesk', 'EB Garamond', 'Inconsolata','Consolas', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-body);
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -142,6 +145,13 @@ body {
     color: var(--text-color);
     font-size: 1.2em;
     transition: background-color 0.3s, color 0.3s;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+::selection {
+    background-color: var(--string-color);
+    color: var(--bg-color);
 }
 
 .container {
@@ -179,7 +189,7 @@ a:hover {
     padding: 20px;
     background-color: var(--sidebar-bg);
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -187,6 +197,9 @@ a:hover {
     color: var(--key-color);
     margin-top: -20px;
     margin-bottom: -24px;
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    font-feature-settings: "liga" 1, "calt" 1;
 }
 
 .footer {
@@ -228,11 +241,15 @@ a:hover {
     border-radius: 8px;
     overflow-x: auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: var(--font-mono);
+    font-size: 0.95em;
+    line-height: 1.7;
+    font-feature-settings: "liga" 1, "calt" 1;
 }
 
 .yaml-block {
     margin: 0 0 12px 0;
-    font-family: 'Inconsolata','Consolas', monospace;
+    font-family: var(--font-mono);
     white-space: pre-wrap;
     background-color: var(--pre-bg);
     color: var(--pre-text);
@@ -255,9 +272,15 @@ a:hover {
     height: 56px;
 }
 
+.header-json {
+    font-family: var(--font-mono);
+}
+
 .header-name {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-display);
     font-weight: 600;
+    font-optical-sizing: auto;
+    letter-spacing: 0.01em;
 }
 
 .profile {
@@ -427,6 +450,7 @@ a:hover {
     margin: 5px;
     border-radius: 4px;
     cursor: pointer;
+    font-family: var(--font-mono);
     font-weight: bold;
     transition: background-color 0.2s;
 }
