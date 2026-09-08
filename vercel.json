@@ -6,6 +6,11 @@
       "permanent": true
     },
     {
+      "source": "/quicklinks",
+      "destination": "/quicklinks/",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "has": [
         {
@@ -36,6 +41,14 @@
     {
       "source": "/prompticon/:path*",
       "destination": "https://prompticon-site.vercel.app/:path*"
+    },
+    {
+      "source": "/quicklinks/",
+      "destination": "https://quick-links-lemon.vercel.app/"
+    },
+    {
+      "source": "/quicklinks/:path*",
+      "destination": "https://quick-links-lemon.vercel.app/:path*"
     }
   ]
 }
