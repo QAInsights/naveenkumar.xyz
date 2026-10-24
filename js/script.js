@@ -180,11 +180,15 @@ function displayAiStack(key, value) {
         Object.values(value).forEach(item => {
             const aiTool = document.createElement('span');
             aiTool.classList.add('string');
-            const aiToolLink = document.createElement('a');
-            aiToolLink.href = item.url || "#";
-            aiToolLink.textContent = item.name;
-            aiToolLink.target = "_blank";
-            aiTool.appendChild(aiToolLink);
+            if (item.url) {
+                const aiToolLink = document.createElement('a');
+                aiToolLink.href = item.url;
+                aiToolLink.textContent = item.name;
+                aiToolLink.target = "_blank";
+                aiTool.appendChild(aiToolLink);
+            } else {
+                aiTool.appendChild(document.createTextNode(item.name));
+            }
             aiTool.style.marginLeft = '25px';
             aiTool.innerHTML = "-" + indent + aiTool.innerHTML + breakLine;
             parentElement.appendChild(aiTool);
