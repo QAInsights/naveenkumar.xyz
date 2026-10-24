@@ -1,20 +1,20 @@
 {
   "aistack": [
-    { "name": "Devin" },
-    { "name": "Qwen" },
-    { "name": "Gemini" },
-    { "name": "DeepSeek" },
-    { "name": "Orca" },
-    { "name": "Command Code" },
-    { "name": "Pi" },
-    { "name": "Claude Code" },
-    { "name": "Codex" },
-    { "name": "OpenCode" },
-    { "name": "Grok" },
-    { "name": "Antigravity" },
+    { "name": "Devin", "url": "https://ai.dosa.dev/tools/devin" },
+    { "name": "Qwen", "url": "https://ai.dosa.dev/tools/qwen-cli" },
+    { "name": "Gemini", "url": "https://ai.dosa.dev/tools/gemini" },
+    { "name": "DeepSeek", "url": "https://ai.dosa.dev/tools/deepseek" },
+    { "name": "Orca", "url": "https://ai.dosa.dev/tools/orca" },
+    { "name": "Command Code", "url": "https://ai.dosa.dev/tools/command-code" },
+    { "name": "Pi", "url": "https://ai.dosa.dev/tools/pi" },
+    { "name": "Claude Code", "url": "https://ai.dosa.dev/tools/claude-code" },
+    { "name": "Codex", "url": "https://ai.dosa.dev/tools/codex-cli" },
+    { "name": "OpenCode", "url": "https://ai.dosa.dev/tools/opencode" },
+    { "name": "Grok", "url": "https://ai.dosa.dev/tools/grok-build" },
+    { "name": "Antigravity", "url": "https://ai.dosa.dev/tools/antigravity" },
     { "name": "Freebuff" },
     { "name": "Poolside" },
-    { "name": "Reasonix" },
-    { "name": "OpenWorker" }
+    { "name": "Reasonix", "url": "https://ai.dosa.dev/tools/reasonix" },
+    { "name": "OpenWorker", "url": "https://ai.dosa.dev/tools/openworker" }
   ]
 }
