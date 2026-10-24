@@ -12,7 +12,7 @@
     { "name": "OpenCode", "url": "https://ai.dosa.dev/tools/opencode" },
     { "name": "Grok", "url": "https://ai.dosa.dev/tools/grok-build" },
     { "name": "Antigravity", "url": "https://ai.dosa.dev/tools/antigravity" },
-    { "name": "Freebuff" },
+    { "name": "Codebuff", "url": "https://ai.dosa.dev/tools/codebuff" },
     { "name": "Poolside" },
     { "name": "Reasonix", "url": "https://ai.dosa.dev/tools/reasonix" },
     { "name": "OpenWorker", "url": "https://ai.dosa.dev/tools/openworker" }
